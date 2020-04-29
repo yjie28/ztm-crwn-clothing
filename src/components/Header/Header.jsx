@@ -1,7 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-// This is a special syntax in React for importing SVG
+/* This is a _special syntax_ in React for importing SVG
+    [ReactComponent] import name tells create-react-app that you 
+    want a React component that renders SVG rather than its filename. 
+    more info: https://facebook.github.io/create-react-app/docs/adding-images-fonts-and-files
+*/
 import { ReactComponent as Logo } from '../../assets/crown.svg';
 
 import './Header.scss';
