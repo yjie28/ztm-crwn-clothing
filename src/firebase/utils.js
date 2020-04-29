@@ -15,6 +15,38 @@ const config = {
 
 firebase.initializeApp(config);
 
+/* DocumentReference vs CollectionReference
+  DocumentReference: CRUD methods, 
+*/
+
+export const createUserProfileDocument = async (userAuth, additionalData) => {
+  // if userAuth is null (=false), do nothing
+  if (!userAuth) return;
+
+  const userRef = firestore.doc(`users/${userAuth.uid}`);
+  const snapShot = await userRef.get();
+
+  /* checking if there's any data in that place, if isn't, create a new user */
+  if (!snapShot.exists) {
+    const { displayName, email } = userAuth;
+    const createdAt = new Date();
+
+    try {
+      // .set -> the create method
+      await userRef.set({
+        displayName,
+        email,
+        createdAt,
+        ...additionalData,
+      });
+    } catch (error) {
+      console.log('Error Creating User', error.message);
+    }
+  }
+
+  return userRef;
+};
+
 export const auth = firebase.auth();
 export const firestore = firebase.firestore();
 
