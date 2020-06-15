@@ -17,6 +17,6 @@ export const selectCollectionsForPreview = createSelector(
 // can store it in object instead; data normalization
 export const selectCollection = (collectionUrlParam) =>
   createSelector(
-    [selectCollectionsForPreview],
+    [selectCollections],
     (collections) => collections[collectionUrlParam]
   );
